@@ -32,7 +32,7 @@ const Home = () => {
             {postList.map((post: any) => {
               return (
                 <div className='post-preview' key={post._id}>
-                  <Link href={'post/' + post._id}>
+                  <Link title='Post detail' href={'post/' + post._id}>
                     <h2 className='post-title'>{post.title}</h2>
                     <h3 className='post-subtitle'>{post.subTitle}</h3>
                   </Link>
