@@ -5,7 +5,6 @@ const PostServerService = {
   async getPosts() {
     await dbConnect();
     const posts = await PostModel.find({});
-    console.log({ posts });
 
     return posts;
   },
