@@ -5,6 +5,7 @@ import 'font-awesome/css/font-awesome.min.css';
 import '../public/css/clean-blog.min.css';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import Script from 'next/script';
 
 function MyApp({ Component, pageProps }: AppProps) {
   <Head>
@@ -33,9 +34,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Component {...pageProps} key={router.route} />
-      <script async type='text/javascript' src='static/js/jquery-1.12.4.min.js' />
-      <script async type='text/javascript' src='static/js/clean-blog.min.js' />
-      <script async type='text/javascript' src='static/js/bootstrap.min.js' />
+      <Script async={false} src='static/js/jquery.min.js'></Script>
+      <Script async={false} src='static/js/clean-blog.min.js'></Script>
+      <Script async={false} src='static/js/bootstrap.min.js'></Script>
     </>
   );
 }
