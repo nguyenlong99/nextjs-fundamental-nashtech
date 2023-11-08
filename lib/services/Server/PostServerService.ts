@@ -1,23 +1,19 @@
-import clientPromise from '@/lib/database/mongodb';
-import { ObjectId } from 'mongodb';
+import dbConnect from '@/lib/database/mongodb';
+import PostModel from '@/lib/models/Post';
+
 const PostServerService = {
   async getPosts() {
-    const client = await clientPromise;
-    const db = client.db('nextjs-mongo');
-
-    const posts = await db.collection('posts').find({}).sort({ metacritic: -1 }).toArray();
+    await dbConnect();
+    const posts = await PostModel.find({});
+    console.log({ posts });
 
     return posts;
   },
   async getPostById(id: string) {
-    const client = await clientPromise;
-    const db = client.db('nextjs-mongo');
-    const post = await db
-      .collection('posts')
-      .find({ _id: new ObjectId(id) })
-      .toArray();
+    await dbConnect();
+    const post = await PostModel.findById(id);
 
-    return post[0];
+    return post;
   },
 };
 export default PostServerService;

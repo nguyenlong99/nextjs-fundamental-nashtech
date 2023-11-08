@@ -1,5 +1,6 @@
 import { NextPage } from 'next';
 import Link from 'next/link';
+import { LoginLink, RegisterLink } from '@kinde-oss/kinde-auth-nextjs/dist/server';
 
 const NavBar: NextPage = () => {
   return (
@@ -34,9 +35,12 @@ const NavBar: NextPage = () => {
             <li>
               <Link href='/contact'>Contact</Link>
             </li>
-            <li>
-              <Link href='/login'>Login</Link>
+            {/* <li>
+              <LoginLink>Sign in</LoginLink>
             </li>
+            <li>
+              <RegisterLink>Sign up</RegisterLink>
+            </li> */}
           </ul>
         </div>
       </div>
