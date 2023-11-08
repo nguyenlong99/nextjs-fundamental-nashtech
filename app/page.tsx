@@ -1,7 +1,9 @@
-import type { GetServerSideProps, NextPage } from 'next';
-import Layout from '../lib/components/layout';
+'use client';
+
+import Layout from '../lib/components/Layout';
 import Link from 'next/link';
 import PostClientService from '@/lib/services/Client/PostClientService';
+import { useEffect, useState } from 'react';
 
 type Post = {
   _id: string;
@@ -9,13 +11,19 @@ type Post = {
   subTitle: string;
 };
 
-interface HomePageProps {
-  postList: Post[];
-}
-const Home: NextPage<HomePageProps> = ({ postList }) => {
-  const backgroundImage = 'img/home-bg.jpg';
+const Home = () => {
+  const backgroundImage = '/img/home-bg.jpg';
   const title = 'Clean Blog';
   const subTitle = 'A Clean Blog Theme by Start Bootstrap';
+
+  const [postList, setPostList] = useState<Post[]>([]);
+  useEffect(() => {
+    (async () => {
+      const postList: Post[] = await PostClientService.getPosts();
+      setPostList(postList);
+    })();
+  }, []);
+
   return (
     <Layout backgroundImage={backgroundImage} title={title} subTitle={subTitle} post={false}>
       <div className='container'>
@@ -39,12 +47,4 @@ const Home: NextPage<HomePageProps> = ({ postList }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps<HomePageProps> = async () => {
-  const postList: Post[] = await PostClientService.getPosts();
-  return {
-    props: {
-      postList,
-    },
-  };
-};
 export default Home;

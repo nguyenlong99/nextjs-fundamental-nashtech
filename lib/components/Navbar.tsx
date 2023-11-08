@@ -1,8 +1,7 @@
-import { NextPage } from 'next';
 import Link from 'next/link';
 import { LoginLink, RegisterLink } from '@kinde-oss/kinde-auth-nextjs/dist/server';
 
-const NavBar: NextPage = () => {
+const NavBar = () => {
   return (
     <nav className='navbar navbar-default navbar-custom navbar-fixed-top'>
       <div className='container-fluid'>
@@ -28,9 +27,6 @@ const NavBar: NextPage = () => {
             </li>
             <li>
               <Link href='/about'>About</Link>
-            </li>
-            <li>
-              <Link href='/post/1'>Sample Post</Link>
             </li>
             <li>
               <Link href='/contact'>Contact</Link>
