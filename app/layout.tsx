@@ -22,9 +22,9 @@ export default function RootLayout({
     <html lang='en'>
       <body>{children}</body>
 
-      <Script async={false} src='../public/static/js/jquery.min.js'></Script>
-      <Script async={false} src='../public/static/js/clean-blog.min.js'></Script>
-      <Script async={false} src='../public/static/js/bootstrap.min.js'></Script>
+      <Script async={false} src='/static/js/jquery.min.js'></Script>
+      <Script async={false} src='/static/js/clean-blog.min.js'></Script>
+      <Script async={false} src='/static/js/bootstrap.min.js'></Script>
     </html>
   );
 }
