@@ -12,7 +12,7 @@ interface PermisstionDetail {
 }
 
 const NavBar = () => {
-  const { isAuthenticated, getUser, getPermission, getPermissions } = getKindeServerSession();
+  const { isAuthenticated, getUser, getPermission } = getKindeServerSession();
 
   return (
     <nav className='navbar navbar-default navbar-custom navbar-fixed-top'>

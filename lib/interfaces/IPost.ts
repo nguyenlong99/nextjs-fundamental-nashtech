@@ -6,4 +6,7 @@ interface IPost {
   content: string;
 }
 
+interface ICreatePost extends Omit<IPost, '_id'> {}
+
 export default IPost;
+export type { ICreatePost };
