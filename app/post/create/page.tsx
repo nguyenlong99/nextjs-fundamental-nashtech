@@ -6,12 +6,12 @@ import Layout from '@/lib/components/Layout';
 export default async function Page() {
   const { isAuthenticated, getPermission } = getKindeServerSession();
   const isAuthenticatedUser = await isAuthenticated();
-  const isCreatePermission = getPermission('create-items-permission');
+  const isCreatePermission = await getPermission('create-items-permission');
   const backgroundImage = '/img/create-post.jpg';
   const title = 'Create new post';
   const subTitle = '';
 
-  if (!isAuthenticatedUser || !isCreatePermission) redirect('/');
+  if (!isAuthenticatedUser || !isCreatePermission.isGranted) redirect('/');
 
   return (
     <Layout backgroundImage={backgroundImage} title={title} subTitle={subTitle} post={false}>
