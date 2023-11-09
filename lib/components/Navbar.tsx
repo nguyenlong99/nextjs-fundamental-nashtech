@@ -1,7 +1,19 @@
 import Link from 'next/link';
-import { LoginLink, RegisterLink } from '@kinde-oss/kinde-auth-nextjs/dist/server';
+import {
+  LoginLink,
+  RegisterLink,
+  getKindeServerSession,
+  LogoutLink,
+} from '@kinde-oss/kinde-auth-nextjs/server';
+
+interface PermisstionDetail {
+  orgCode: string;
+  isGranted: boolean;
+}
 
 const NavBar = () => {
+  const { isAuthenticated, getUser, getPermission, getPermissions } = getKindeServerSession();
+
   return (
     <nav className='navbar navbar-default navbar-custom navbar-fixed-top'>
       <div className='container-fluid'>
@@ -31,12 +43,40 @@ const NavBar = () => {
             <li>
               <Link href='/contact'>Contact</Link>
             </li>
-            {/* <li>
-              <LoginLink>Sign in</LoginLink>
-            </li>
-            <li>
-              <RegisterLink>Sign up</RegisterLink>
-            </li> */}
+            {(async () => {
+              const user = await getUser();
+              const createPermission: PermisstionDetail = await getPermission(
+                'create-items-permission'
+              );
+
+              return (await isAuthenticated()) ? (
+                <>
+                  <li>
+                    <Link href='#'>
+                      Welcome, {user?.given_name} {user?.family_name}
+                    </Link>
+                  </li>
+
+                  {createPermission.isGranted ? (
+                    <li>
+                      <Link href='/post/create'>Create post</Link>
+                    </li>
+                  ) : null}
+                  <li>
+                    <LogoutLink className='text-black'>Log out</LogoutLink>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <LoginLink>Sign in</LoginLink>
+                  </li>
+                  <li>
+                    <RegisterLink>Sign up</RegisterLink>
+                  </li>
+                </>
+              );
+            })()}
           </ul>
         </div>
       </div>

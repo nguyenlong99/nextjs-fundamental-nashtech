@@ -12,12 +12,11 @@ type Props = {
 
 const Layout = ({ children, backgroundImage, title, subTitle, post }: Props) => {
   return (
-    <div>
-      <NavBar />
+    <>
       <Header backgroundImage={backgroundImage} title={title} subTitle={subTitle} post={post} />
       <main>{children}</main>
       <Footer />
-    </div>
+    </>
   );
 };
 

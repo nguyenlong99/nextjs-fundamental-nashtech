@@ -5,6 +5,7 @@ import '../public/css/clean-blog.min.css';
 import '../public/css/gg-font-lora.css';
 import '../public/css/gg-font-opensans.css';
 import Script from 'next/script';
+import NavBar from '@/lib/components/Navbar';
 
 export const metadata: Metadata = {
   title: 'Clean Blog',
@@ -20,7 +21,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body>{children}</body>
+      <body>
+        <NavBar />
+
+        {children}
+      </body>
 
       <Script async={false} src='/static/js/jquery.min.js'></Script>
       <Script async={false} src='/static/js/clean-blog.min.js'></Script>
