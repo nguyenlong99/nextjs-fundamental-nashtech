@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import PostClientService from '@/lib/services/Client/PostClientService';
 import { useRouter } from 'next/navigation';
+import { useRef } from 'react';
 
 export default function FormWrapper() {
   const {
@@ -13,11 +14,21 @@ export default function FormWrapper() {
     formState: { errors },
   } = useForm();
   const router = useRouter();
+  const isImageValid = useRef(false);
   const onSubmit = (data: any) => {
     (async () => {
       try {
-        console.log({ data });
         const createdPost = await PostClientService.createPost(data);
+        isImageValid.current = false;
+        await fetch(data.backgroundImage, { mode: 'no-cors' })
+          .then((res) => {
+            isImageValid.current = true;
+          })
+          .catch((err) => {
+            isImageValid.current = false;
+          });
+
+        if (!isImageValid.current) return alert('Please input valid backgroung image URL');
 
         if (Object.keys(createdPost).length > 0) {
           alert('Create post successfully');
