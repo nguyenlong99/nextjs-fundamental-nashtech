@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../public/css/clean-blog.min.css';
 import '../public/css/gg-font-lora.css';
 import '../public/css/gg-font-opensans.css';
